@@ -40,21 +40,3 @@ module.exports = (robot) ->
 
 	robot.respond /test/, (res) ->
 		console.log res.message
-
-
-	robot.listen(
-		(message) ->
-			text = message.text
-			if !text then return false
-			if text == "#{robot.name} #{robot.name}" then return false
-			for command in commands
-				if text.match ///\b#{command.split('-')[0].trim()}\b///i
-					return false
-			return true
-		(res) ->
-			s = '我还没脑子'.split('')
-			_s = ''
-			while s.length > 0
-				_s += s.splice(Math.floor(Math.random() * s.length), 1)[0]
-			res.reply _s
-	)
