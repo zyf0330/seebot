@@ -1,2 +1,2 @@
-# export HUBOT_LOG_LEVEL="debug"
+export HUBOT_LOG_LEVEL="debug"
 bin/hubot
