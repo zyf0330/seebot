@@ -1,2 +1,2 @@
 export HUBOT_LOG_LEVEL="debug"
-bin/hubot
+bin/hubot >>debuglog 2>>&1
