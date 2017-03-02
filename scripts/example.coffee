@@ -37,6 +37,7 @@ module.exports = (robot) ->
 
 	robot.hear ///^#{robot.name}$///i, (res) ->
 		res.reply '叫我干什么'
-
+	robot.hear /谁最帅/i, (res) ->
+		res.send '绝对不是谭粽球了！'
 	# robot.respond /test/, (res) ->
 	# 	console.log res.message
