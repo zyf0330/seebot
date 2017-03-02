@@ -46,5 +46,10 @@ module.exports = (robot) ->
 	robot.hear /谁最丑/i, (res) ->
 		p = Math.random()
 		res.send if p < 0.7 then '七成是谭粽球！' else if p < 0.8 then '八成是谭粽球！' else if p < 0.9 then '九成是谭粽球！' else '只有十分之一的几率不是他，你们懂了吗'
+	robot.hear /^天黑了/i, (res) ->
+		res.send '谭粽球出来耍帅🐷了'
+	robot.hear /^天亮了/i, (res) ->
+		res.send '谭粽球回去丑😭了'
+
 	# robot.respond /test/, (res) ->
 	# 	console.log res.message
