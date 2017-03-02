@@ -20,14 +20,17 @@ module.exports = (robot) ->
 		res.send res.random leaveReplies
 
 
-	robot.respond /.*(你(能|会)(做|干)什么|what can (you|u) do).*/, (res) ->
+	robot.hear ///^#{robot.name}$///i, (res) ->
+		res.reply '叫我干什么'
+
+	robot.respond /(你(能|会)(做|干)什么(呀|啊)?|what can (you|u) do)/, (res) ->
 		res.reply '我会干的多呢，say help to me'
 
 	commands.push "#{robot.name} hi - say hi to #{robot.name}"
 	robot.respond /\W*hi\W*$/i, (res) ->
 		res.reply 'Hi too!'
 
-	commands.push "#{robot.name} whousenet - tell you who are occupying Ethernet and Internet bandwidth"
+	commands.push "#{robot.name} whousenet - tell you who is occupying Ethernet and Internet bandwidth"
 	robot.respond /whousenet/i, (res) ->
 		res.send '获取中。。。不要重复执行'
 		child_process.exec '/home/zyf/whousenet.sh', (err, stdout, stderr) ->
@@ -35,9 +38,13 @@ module.exports = (robot) ->
 				return res.send '获取失败', stdout, stderr
 			res.send stdout
 
-	robot.hear ///^#{robot.name}$///i, (res) ->
-		res.reply '叫我干什么'
+	commands.push "谁最帅 - tell you who is the most beautiful one"
 	robot.hear /谁最帅/i, (res) ->
-		res.send '绝对不是谭粽球了！'
+		p = Math.random()
+		res.send if p < 0.8 then '绝对不是谭粽球了！' else '会是谁呢，应该是名字里有风又有云的那个人'
+	commands.push "谁最丑 - tell you who is the most ugly one"
+	robot.hear /谁最丑/i, (res) ->
+		p = Math.random()
+		res.send if p < 0.7 then '七成是谭粽球！' else if p < 0.8 then '八成是谭粽球！' else if p < 0.9 then '九成是谭粽球！' else '只有十分之一的几率不是他，你们懂了吗'
 	# robot.respond /test/, (res) ->
 	# 	console.log res.message
