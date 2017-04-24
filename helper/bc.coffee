@@ -17,4 +17,4 @@ module.exports =
 			message.type = 'message'
 		return o
 	notifyChannel: (text) ->
-		'@<-channel->' + text
+		'@<-channel-> ' + text
