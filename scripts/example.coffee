@@ -9,9 +9,14 @@
 #	 These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
 child_process = require 'child_process'
+schedule = require 'node-schedule'
+bc = require '../helper/bc'
 
 module.exports = (robot) ->
 	commands = robot.commands
+
+	notify = {}
+
 	enterReplies = ['Hi', 'Target Acquired', 'Firing', 'Hello friend.', 'Gotcha', 'I see you']
 	leaveReplies = ['Someone leaves']
 	robot.enter (res) ->
@@ -50,6 +55,15 @@ module.exports = (robot) ->
 		res.send '谭粽球出来耍帅🐷了'
 	robot.hear /^天亮了/i, (res) ->
 		res.send '谭粽球回去丑😭了'
+
+	notify.updateProgress = () ->
+		channel = bc.channels.allPeople
+		# channel = bc.channels.test
+		robot.send bc.envelope(null, channel), bc.notifyChannel('请各位更新自己的进度墙标签')
+
+	# 工作日每晚六点提醒
+	schedule.scheduleJob '0 18 * * 1-5', notify.updateProgress
+
 
 	# robot.respond /test/, (res) ->
 	# 	console.log res.message
