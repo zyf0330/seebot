@@ -35,13 +35,13 @@ module.exports = (robot) ->
 	robot.respond /\W*hi\W*$/i, (res) ->
 		res.reply 'Hi too!'
 
-	commands.push "#{robot.name} whousenet - tell you who is occupying Ethernet and Internet bandwidth"
-	robot.respond /whousenet/i, (res) ->
-		res.send '获取中。。。不要重复执行'
-		child_process.exec '/home/zyf/whousenet.sh', (err, stdout, stderr) ->
-			if err
-				return res.send '获取失败', stdout, stderr
-			res.send stdout
+	# commands.push "#{robot.name} whousenet - tell you who is occupying Ethernet and Internet bandwidth"
+	# robot.respond /whousenet/i, (res) ->
+	# 	res.send '获取中。。。不要重复执行'
+	# 	child_process.exec '/home/zyf/whousenet.sh', (err, stdout, stderr) ->
+	# 		if err
+	# 			return res.send '获取失败', stdout, stderr
+	# 		res.send stdout
 
 	commands.push "谁最帅 - tell you who is the most beautiful one"
 	robot.hear /谁最帅/i, (res) ->
