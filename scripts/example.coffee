@@ -63,7 +63,9 @@ module.exports = (robot) ->
 
 	# 工作日每晚六点提醒
 	schedule.scheduleJob '0 18 * * 1-5', notify.updateProgress
-
+	
+	robot.hear /^1$/, (res) ->
+		res.send '2~2~~2222222'
 
 	# robot.respond /test/, (res) ->
 	# 	console.log res.message
