@@ -55,6 +55,9 @@ module.exports = (robot) ->
 		res.send '谭粽球出来耍帅🐷了'
 	robot.hear /^天亮了/i, (res) ->
 		res.send '谭粽球回去丑😭了'
+	
+	robot.respond /更新了/i, (res) ->
+		robot.send bc.envelope(null, bc.channels.allPeople), bc.notifyChannel('游戏大厅更新啦')
 
 	notify.updateProgress = () ->
 		channel = bc.channels.allPeople
@@ -64,8 +67,8 @@ module.exports = (robot) ->
 	# 工作日每晚六点提醒
 	schedule.scheduleJob '0 18 * * 1-5', notify.updateProgress
 	
-	robot.hear /^1$/, (res) ->
-		res.send '2~2~~2222222'
+	# robot.hear /^1$/, (res) ->
+	# 	res.send '2~2~~2222222'
 
 	# robot.respond /test/, (res) ->
 	# 	console.log res.message
