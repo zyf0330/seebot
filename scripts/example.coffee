@@ -57,7 +57,9 @@ module.exports = (robot) ->
 		res.send '谭粽球回去丑😭了'
 	
 	robot.respond /更新了/i, (res) ->
-		robot.send bc.envelope(null, bc.channels.allPeople), bc.notifyChannel('游戏大厅更新啦')
+		text = res.message.text
+		appendText = text.substring(text.indexOf('更新了') + 3) 
+		robot.send bc.envelope(null, bc.channels.allPeople), bc.notifyChannel("游戏大厅更新啦#{appendText}")
 
 	notify.updateProgress = () ->
 		channel = bc.channels.allPeople
