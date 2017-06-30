@@ -55,16 +55,18 @@ module.exports = (robot) ->
 		res.send '谭粽球出来耍帅🐷了'
 	robot.hear /^天亮了/i, (res) ->
 		res.send '谭粽球回去丑😭了'
-	
+	robot.respond /广告/i, (res) ->
+		text = res.message.text
+		appendText = text.substring(text.indexOf('广告') + 2)
+		robot.messageRoom bc.channels.allPeople, bc.notifyChannel("广告时间！#{appendText}")
 	robot.respond /更新了/i, (res) ->
 		text = res.message.text
 		appendText = text.substring(text.indexOf('更新了') + 3) 
-		robot.send bc.envelope(null, bc.channels.allPeople), bc.notifyChannel("游戏大厅更新啦#{appendText}")
+		robot.messageRoom bc.channels.allPeople, bc.notifyChannel("游戏大厅更新啦#{appendText}")
 
 	notify.updateProgress = () ->
-		channel = bc.channels.allPeople
 		# channel = bc.channels.test
-		robot.send bc.envelope(null, channel), bc.notifyChannel('请各位更新自己的进度墙标签')
+		robot.messageRoom bc.channels.allPeople, bc.notifyChannel('请各位更新自己的进度墙标签')
 
 	# 工作日每晚六点提醒
 	schedule.scheduleJob '0 18 * * 1-5', notify.updateProgress
